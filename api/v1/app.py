@@ -4,10 +4,10 @@ Route module for the API
 """
 from os import getenv
 from api.v1.views import app_views
-from flask import Flask, jsonify, abort, request, make_response
+from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
-from typing import Literal
+
 
 
 app = Flask(__name__)
@@ -20,15 +20,6 @@ def not_found(error) -> str:
     """ Not found handler
     """
     return jsonify({"error": "Not found"}), 404
-
-
-@app.errorhandler(401)
-def unauthorized(error):
-    """Unauthorized handler"""
-    response = jsonify({"error": "Unauthorized"})
-    response = make_response(response, 401)
-    response.headers["Content-Type"] = "appication/json: charset=utf-8"
-    return response
 
 
 if __name__ == "__main__":
